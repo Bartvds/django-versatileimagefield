@@ -83,7 +83,7 @@ class ClearableFileInputWithImagePreview(ClearableFileInput):
                 'data-hidden_field_id="%(hidden_field_id)s" '
                 'data-point_stage_id="%(point_stage_id)s" '
                 'data-ppoi_id="%(ppoi_id)s" class="sizedimage-preview"/>') % {
-            'sized_url': value.thumbnail['300x300'],
+            'sized_url': value.thumbnail['100x100'],
             'image_preview_id': self.image_preview_id(name),
             'hidden_field_id': self.get_hidden_field_id(name),
             'point_stage_id': self.get_point_stage_id(name),
