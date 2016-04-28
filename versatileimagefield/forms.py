@@ -26,8 +26,12 @@ class VersatileImageFormField(ImageField):
         ImageField
         """
         if data is not None:
-            if hasattr(data, 'open'):
-                data.open()
+            try:
+                # this sometimes raises 'ValueError: The file cannot be reopened.'
+                if hasattr(data, 'open'):
+                    data.open()
+            except ValueError:
+                pass
             return super(VersatileImageFormField, self).to_python(data)
 
 
