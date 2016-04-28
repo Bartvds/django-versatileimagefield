@@ -3,7 +3,7 @@ from django.forms import ModelForm
 
 from versatileimagefield.widgets import VersatileImagePPOISelectWidget
 
-from .models import VersatileImageTestModel, VersatileImageWidgetTestModel
+from .models import VersatileImageTestModel, VersatileImageWidgetTestModel, VersatileImageTestParentModel, VersatileImageTestChildModel
 
 
 class VersatileImageTestModelForm(ModelForm):
@@ -26,5 +26,32 @@ class VersatileImageTestModelAdmin(admin.ModelAdmin):
     form = VersatileImageTestModelForm
 
 
+class AlwaysChangedModelForm(ModelForm):
+    """
+    Ensures VersatileImageField's inline models ALWAYS get saved so PPOI
+    values will make their way into the database.
+
+    via: https://github.com/WGBH/django-versatileimagefield/issues/44
+    """
+    def has_changed(self):
+        return True
+
+
+class VersatileImageTestChildModelInlineAdmin(admin.StackedInline):
+    model = VersatileImageTestChildModel
+    form = AlwaysChangedModelForm
+    fields = (
+        'image'
+    )
+
+
+class VersatileImageTestParentModelAdmin(admin.ModelAdmin):
+    fields = ('some_field',)
+    inlines = (
+        VersatileImageTestChildModelInlineAdmin,
+    )
+
+
 admin.site.register(VersatileImageTestModel, VersatileImageTestModelAdmin)
 admin.site.register(VersatileImageWidgetTestModel)
+admin.site.register(VersatileImageTestParentModel, VersatileImageTestParentModelAdmin)

@@ -78,3 +78,28 @@ class VersatileImageWidgetTestModel(models.Model):
     )
     ppoi = PPOIField()
     optional_image_with_ppoi_ppoi = PPOIField()
+
+
+class VersatileImageTestParentModel(models.Model):
+    some_field = models.CharField(default='foo')
+
+
+class VersatileImageTestChildModel(models.Model):
+    parent = models.ForeignKey(VersatileImageTestParentModel)
+    image = VersatileImageField(
+        upload_to='./',
+        width_field='width',
+        height_field='height',
+        ppoi_field='ppoi',
+    )
+    height = models.PositiveIntegerField(
+        'Image Height',
+        blank=True,
+        null=True
+    )
+    width = models.PositiveIntegerField(
+        'Image Width',
+        blank=True,
+        null=True
+    )
+    ppoi = PPOIField()
