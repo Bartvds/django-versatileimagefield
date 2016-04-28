@@ -60,7 +60,7 @@ from .forms import (
     VersatileImageWidgetTestModelForm,
     VersatileImageTestModelFormDjango15
 )
-from .models import VersatileImageTestModel, VersatileImageWidgetTestModel
+from .models import VersatileImageTestModel, VersatileImageWidgetTestModel, VersatileImageTestParentModel, VersatileImageTestChildModel
 from .serializers import VersatileImageTestModelSerializer
 
 ADMIN_URL = '/admin/tests/versatileimagewidgettestmodel/1/'
@@ -1125,3 +1125,8 @@ class VersatileImageFieldTestCase(VersatileImageFieldBaseTestCase):
                 '-thumbnail-100x100-70.jpg'
             )
         )
+
+    def test_inline_valueerror(self):
+        """Ensure VersatileImageField fields in inlines don't raise ValueError."""
+        # code that raises ValueError here
+
