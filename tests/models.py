@@ -81,7 +81,7 @@ class VersatileImageWidgetTestModel(models.Model):
 
 
 class VersatileImageTestParentModel(models.Model):
-    some_field = models.CharField(default='foo')
+    some_field = models.BooleanField(default=True)
 
 
 class VersatileImageTestChildModel(models.Model):
