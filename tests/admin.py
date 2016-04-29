@@ -41,12 +41,16 @@ class VersatileImageTestChildModelInlineAdmin(admin.StackedInline):
     model = VersatileImageTestChildModel
     form = AlwaysChangedModelForm
     fields = (
-        'image'
+        'image',
     )
+    extra = 0
 
 
 class VersatileImageTestParentModelAdmin(admin.ModelAdmin):
-    fields = ('some_field',)
+    fields = (
+        'some_field',
+        'image',
+    )
     inlines = (
         VersatileImageTestChildModelInlineAdmin,
     )

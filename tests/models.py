@@ -82,6 +82,23 @@ class VersatileImageWidgetTestModel(models.Model):
 
 class VersatileImageTestParentModel(models.Model):
     some_field = models.BooleanField(default=True)
+    image = VersatileImageField(
+        upload_to='./',
+        width_field='width',
+        height_field='height',
+        ppoi_field='ppoi',
+    )
+    height = models.PositiveIntegerField(
+        'Image Height',
+        blank=True,
+        null=True
+    )
+    width = models.PositiveIntegerField(
+        'Image Width',
+        blank=True,
+        null=True
+    )
+    ppoi = PPOIField()
 
 
 class VersatileImageTestChildModel(models.Model):
